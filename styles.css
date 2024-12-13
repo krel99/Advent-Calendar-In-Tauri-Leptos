@@ -42,9 +42,30 @@ body {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(6, 125px);
   gap: 0.5rem;
   padding: 0.5rem;
+  justify-content: center;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+@media (max-width: 800px) {
+  .grid {
+    grid-template-columns: repeat(4, 125px);
+  }
+}
+
+@media (max-width: 550px) {
+  .grid {
+    grid-template-columns: repeat(3, 125px);
+  }
+}
+
+@media (max-width: 400px) {
+  .grid {
+    grid-template-columns: repeat(2, 125px);
+  }
 }
 
 .relative {
