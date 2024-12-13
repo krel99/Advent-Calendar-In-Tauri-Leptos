@@ -1,8 +1,8 @@
-use leptos::*;
+use js_sys::Math;
 use leptos::html::Canvas;
 use leptos::wasm_bindgen::JsCast;
+use leptos::*;
 use web_sys;
-use js_sys::Math;
 
 #[derive(Debug, Clone)]
 struct BoxState {
@@ -65,29 +65,29 @@ pub fn Grid() -> impl IntoView {
                 let state = BoxState {
                     is_open: create_rw_signal(false)
                 };
-                
+
                 let node_ref = create_node_ref::<Canvas>();
-                
+
                 let on_click = move |_| {
                     if let Some(canvas) = node_ref.get() {
                         let canvas_elem: &web_sys::HtmlCanvasElement = canvas.as_ref();
-                        
+
                         if let Ok(Some(context)) = canvas_elem.get_context("2d") {
                             if let Ok(context) = context.dyn_into::<web_sys::CanvasRenderingContext2d>() {
                                 canvas_elem.set_width(125);
                                 canvas_elem.set_height(125);
-                                
+
                                 // Clear canvas
                                 context.clear_rect(0.0, 0.0, 125.0, 125.0);
-                                
+
                                 // Semi-transparent background
                                 context.set_fill_style(&"rgba(135, 206, 235, 0.7)".into());
                                 context.fill_rect(0.0, 0.0, 125.0, 125.0);
-                                
+
                                 // Snowflake style
                                 context.set_stroke_style(&"#FFFFFF".into());
                                 context.set_line_width(2.0);
-                                
+
                                 match day {
                                     1 => {
                                         // Special pattern for day 1
@@ -103,11 +103,30 @@ pub fn Grid() -> impl IntoView {
                                         let main_x = 62.5 + random_range(-10.0, 10.0);
                                         let main_y = 62.5 + random_range(-10.0, 10.0);
                                         draw_snowflake(&context, main_x, main_y, main_size, day);
-                                        
+
                                         // 50% chance for a second smaller snowflake
                                         if Math::random() > 0.5 {
                                             let small_x = random_range(30.0, 95.0);
                                             let small_y = random_range(30.0, 95.0);
+                                            draw_snowflake(&context, small_x, small_y, main_size * 0.6, day);
+                                        }
+
+                                        // 25% chance for a second smaller snowflake
+                                        if Math::random() > 0.75 {
+                                            let small_x = random_range(20.0, 105.0);
+                                            let small_y = random_range(20.0, 105.0);
+                                            draw_snowflake(&context, small_x, small_y, main_size * 0.6, day);
+                                        }
+                                        // 10% chance for a second smaller snowflake
+                                        if Math::random() > 0.9 {
+                                            let small_x = random_range(10.0, 115.0);
+                                            let small_y = random_range(10.0, 115.0);
+                                            draw_snowflake(&context, small_x, small_y, main_size * 0.6, day);
+                                        }
+                                        // 3% chance for a second smaller snowflake
+                                        if Math::random() > 0.97 {
+                                            let small_x = random_range(3.0, 122.0);
+                                            let small_y = random_range(3.0, 122.0);
                                             draw_snowflake(&context, small_x, small_y, main_size * 0.6, day);
                                         }
                                     }
@@ -123,12 +142,12 @@ pub fn Grid() -> impl IntoView {
                         <canvas _ref=node_ref class="black-border">
                             "Your browser does not support canvas"
                         </canvas>
-                        <Show 
+                        <Show
                             when=move || !state.is_open.get()
                             fallback=|| view! { <span></span> }
                         >
                             <span class="absolute top-2 left-2 day">{day}</span>
-                            <div 
+                            <div
                                 class="absolute inset-0 bg-transitional cursor-pointer"
                                 on:click=on_click
                             >

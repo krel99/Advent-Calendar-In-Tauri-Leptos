@@ -1,5 +1,5 @@
-use leptos::*;
 use crate::grid::Grid;
+use leptos::*;
 
 #[component]
 pub fn App() -> impl IntoView {
