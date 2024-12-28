@@ -18,18 +18,22 @@ fn draw_snowflake(
     x: f64,
     y: f64,
     base_size: f64,
-    day: i32
+    day: i32,
 ) {
     context.save();
     context.translate(x, y).unwrap();
 
     // Randomize parameters based on day as seed
-    let arms = if day == 1 { 8 } else { 6 + ((Math::random() * 4.0) as i32) };
+    let arms = if day == 1 {
+        8
+    } else {
+        6 + ((Math::random() * 4.0) as i32)
+    };
     let size = base_size * (0.8 + Math::random() * 0.4); // Vary size by ±20%
     let branch_pos = 0.3 + Math::random() * 0.3; // Branch position varies between 30-60% of arm
     let branch_size = size * (0.15 + Math::random() * 0.15); // Branch size varies
 
-    for i in 0..arms {
+    for _i in 0..arms {
         context.begin_path();
         context.move_to(0.0, 0.0);
         context.line_to(size, 0.0);
@@ -45,13 +49,21 @@ fn draw_snowflake(
             let small_branch_pos = size * (branch_pos + 0.2);
             let small_branch_size = branch_size * 0.6;
             context.move_to(small_branch_pos, 0.0);
-            context.line_to(small_branch_pos + small_branch_size, small_branch_size * 0.7);
+            context.line_to(
+                small_branch_pos + small_branch_size,
+                small_branch_size * 0.7,
+            );
             context.move_to(small_branch_pos, 0.0);
-            context.line_to(small_branch_pos + small_branch_size, -small_branch_size * 0.7);
+            context.line_to(
+                small_branch_pos + small_branch_size,
+                -small_branch_size * 0.7,
+            );
         }
 
         context.stroke();
-        context.rotate((2.0 * std::f64::consts::PI) / (arms as f64)).unwrap();
+        context
+            .rotate((2.0 * std::f64::consts::PI) / (arms as f64))
+            .unwrap();
     }
 
     context.restore();
