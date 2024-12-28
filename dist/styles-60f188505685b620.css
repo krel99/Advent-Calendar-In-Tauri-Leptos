@@ -1,0 +1,159 @@
+.logo.leptos:hover {
+  filter: drop-shadow(0 0 2em #a82e20);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+
+  color: #0f0f0f;
+  background-color: #f6f6f6;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background-image: url("https://cdn.leonardo.ai/users/64363050-2651-4456-b3ff-5edc12fe44fb/generations/7c252643-cc28-4a16-9037-601c2f0ab7b8/RPG_v5_A_young_celestial_being_adorned_in_ceremonial_winter_ga_3.jpg");
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(6, 125px);
+  gap: 0.5rem;
+  padding: 0.5rem;
+  justify-content: center;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+@media (max-width: 800px) {
+  .grid {
+    grid-template-columns: repeat(4, 125px);
+  }
+}
+
+@media (max-width: 550px) {
+  .grid {
+    grid-template-columns: repeat(3, 125px);
+  }
+}
+
+@media (max-width: 400px) {
+  .grid {
+    grid-template-columns: repeat(2, 125px);
+  }
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.day {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ff3366;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  font-family: "Helvetica Neue", sans-serif;
+  z-index: 2;
+}
+
+canvas {
+  border: 3px solid black;
+  width: 100%;
+  height: 100%;
+}
+
+.box {
+  transition: transform 0.3s ease;
+  aspect-ratio: 1;
+  overflow: hidden;
+  width: 125px;
+  height: 125px;
+}
+
+.box:hover {
+  transform: scale(1.05);
+}
+
+.top-2 {
+  top: 9px;
+}
+
+.left-2 {
+  left: 9px;
+}
+
+.inset-0 {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.bg-transitional {
+  background: linear-gradient(
+    45deg,
+    #ff6b6b,
+    #4ecdc4,
+    #45b7d1,
+    #96c93d,
+    #e84393
+  );
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  /* height: 100%; */
+  /* width: 100%; */
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+h1 {
+  padding-top: 1.5rem;
+  padding-bottom: 1.2rem;
+  margin-left: 1rem;
+  font-size: 2.5rem;
+}
